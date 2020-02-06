@@ -2,4 +2,4 @@
 
 require './lib/ESPNScraper'
 
-ESPNScraper::CLI.new.call
+ESPNScraper::CLI.new.run

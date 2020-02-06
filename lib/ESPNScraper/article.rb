@@ -1,5 +1,6 @@
 class Article
-  attr_reader :title, :description, :url, :content
+  attr_accessor :content
+  attr_reader :title, :description, :url
   @@all = []
 
   def initialize(title, description, url)

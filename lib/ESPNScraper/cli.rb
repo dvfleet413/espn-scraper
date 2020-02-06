@@ -43,8 +43,7 @@ class ESPNScraper::CLI
     abbr_teams
   end
 
-
-  def call
+  def run
     list_teams
     menu
     Scraper.scrape_new_articles(@url)
@@ -72,19 +71,6 @@ class ESPNScraper::CLI
     puts "Please enter an the abbreviated name of your team (e.g. bos, bal, nyy)"
     menu
   end
-
-#  def scrape
-#    html = open(@url)
-#    doc = Nokogiri::HTML(html)
-#    stories = doc.css("div.item-info-wrap")
-#    # title stories.css("h1").text
-#    # description stories.css("p").text
-#    stories.each do |story|
-#      title = story.css("h1").text
-#      description = story.css("p").text
-#      Article.new(title, description)
-#    end
-#  end
 
   def display_articles
     Article.all.slice(0,5).each_with_index do |article, index|

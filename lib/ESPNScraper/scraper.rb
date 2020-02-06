@@ -9,6 +9,9 @@ class Scraper
     stories.each do |story|
       title = story.css("h1").text
       description = story.css("p").text
+#   some links have href of absolute url instead of relative
+#   check if story.css("a").attribute("href").value starts with 'http'
+#   before assigning url variable    
       url = "https://www.espn.com#{story.css("a").attribute("href").value}"
       Article.new(title, description, url)
     end

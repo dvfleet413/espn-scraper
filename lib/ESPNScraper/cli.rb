@@ -8,8 +8,6 @@ class ESPNScraper::CLI
     Scraper.scrape_new_articles(@url)
     display_articles
     article_menu
-    show_article_content
-    binding.pry
   end
 
   def list_teams
@@ -50,6 +48,8 @@ class ESPNScraper::CLI
     if input.to_i.between?(1, 5)
       article_index = input.to_i - 1
       @article = Article.all[article_index]
+      show_article_content
+      exit_menu
     else
       invalid_entry
       article_menu
@@ -60,6 +60,27 @@ class ESPNScraper::CLI
     Scraper.get_content(self.article)
     puts "#{self.article.title} \n \n"
     self.article.content.each {|p| puts "#{p.text} \n \n"}
+  end
+
+  def exit_menu
+    puts "Finished reading? Enter one of the following options..."
+    puts "1 - Go back to article list for your #{team}."
+    puts "2 - Select a new team."
+    puts "3 - Exit the program."
+
+    input = gets.chomp
+    if input == "1"
+      display_articles
+      article_menu
+    elsif input == "2"
+      Article.destroy_all
+      run
+    elsif input == "3"
+      exit
+    else
+      invalid_entry
+      exit_menu
+    end
   end
 
   private

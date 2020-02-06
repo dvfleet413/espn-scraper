@@ -87,8 +87,8 @@ class ESPNScraper::CLI
 #  end
 
   def display_articles
-    Article.all.slice(0,5).each do |article|
-      puts "#{article.title} \n \n"
+    Article.all.slice(0,5).each_with_index do |article, index|
+      puts "#{index + 1}. #{article.title} \n \n"
       puts "  #{article.description} \n \n \n"
     end
   end

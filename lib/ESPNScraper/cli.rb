@@ -1,12 +1,14 @@
 # CLI Controller
 class ESPNScraper::CLI
-  attr_accessor :team, :url
+  attr_accessor :team, :url, :article
 
   def run
     list_teams
     menu
     Scraper.scrape_new_articles(@url)
     display_articles
+    article_menu
+    show_article_content
     binding.pry
   end
 
@@ -22,13 +24,17 @@ class ESPNScraper::CLI
   def menu
     puts "Type the abbreviated name of the team you'd like to read about..."
     @team = gets.chomp.downcase
-    Teams.team_abbreviations.include?(@team) ? build_url : invalid_entry
+    if Teams.team_abbreviations.include?(@team)
+      build_url
+    else
+      invalid_entry
+      menu
+    end
   end
 
   def invalid_entry
     puts "Sorry, we didn't understand your entry..."
-    puts "Please enter an the abbreviated name of your team (e.g. bos, bal, nyy)"
-    menu
+    puts "Please try again..."
   end
 
   def display_articles
@@ -36,6 +42,24 @@ class ESPNScraper::CLI
       puts "#{index + 1}. #{article.title} \n \n"
       puts "  #{article.description} \n \n \n"
     end
+  end
+
+  def article_menu
+    puts "Enter the number of the article you would like to read..."
+    input = gets.chomp
+    if input.to_i.between?(1, 5)
+      article_index = input.to_i - 1
+      @article = Article.all[article_index]
+    else
+      invalid_entry
+      article_menu
+    end
+  end
+
+  def show_article_content
+    Scraper.get_content(self.article)
+    # puts "#{self.article.content}"
+    self.article.content.each {|p| puts "#{p.text} \n \n"}
   end
 
   private

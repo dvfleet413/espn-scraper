@@ -17,7 +17,7 @@ class Scraper
   def self.get_content(article)
     html = open(article.url)
     doc = Nokogiri::HTML(html)
-    article.content = doc.css("div.article-body p").text
+    article.content = doc.css("div.article-body p")
   end
 
 end

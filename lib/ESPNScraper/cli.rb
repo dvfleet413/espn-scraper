@@ -12,7 +12,7 @@ class ESPNScraper::CLI
 
   def list_teams
     Teams.teams.each do |division, teams|
-      puts division.to_s.sub(/_/, ' ').upcase
+      puts division.to_s.sub(/_/, ' ').upcase.colorize(:magenta).bold
       teams.each do |team|
         team.each{|key,value| puts "  #{key.to_s.upcase} - #{value}"}
       end
@@ -20,13 +20,13 @@ class ESPNScraper::CLI
   end
 
   def menu
-    puts "Type the abbreviated name of the team you'd like to read about, or type exit to leave the program."
+    puts "Type the abbreviated name of the team you'd like to read about, or type exit to leave the program.".colorize(:yellow)
     input = gets.chomp.downcase
     if Teams.team_abbreviations.include?(input)
       @team = input
       build_url
     elsif input == "exit"
-      exit 
+      exit
     else
       invalid_entry
       menu
@@ -34,19 +34,19 @@ class ESPNScraper::CLI
   end
 
   def invalid_entry
-    puts "Sorry, we didn't understand your entry..."
-    puts "Please try again..."
+    puts "Sorry, we didn't understand your entry...".colorize(:red)
+    puts "Please try again...".colorize(:red)
   end
 
   def display_articles
     Article.all.slice(0,5).each_with_index do |article, index|
-      puts "#{index + 1}. #{article.title} \n \n"
-      puts "  #{article.description} \n \n \n"
+      puts "#{index + 1}. #{article.title}".colorize(:light_blue).bold
+      puts "  #{article.description} \n \n"
     end
   end
 
   def article_menu
-    puts "Enter the number of the article you would like to read, or type exit to leave the program."
+    puts "Enter the number of the article you would like to read, or type exit to leave the program.".colorize(:yellow)
     input = gets.chomp
     if input.to_i.between?(1, 5)
       article_index = input.to_i - 1
@@ -63,16 +63,16 @@ class ESPNScraper::CLI
 
   def show_article_content
     Scraper.get_content(self.article)
-    puts "#{self.article.title} \n \n"
+    puts "#{self.article.title} \n \n".colorize(:light_blue).bold
     if self.article.content.size > 0
       self.article.content.each {|p| puts "#{p.text} \n \n"}
     else
-      puts "This is a link to an ESPN Radio report. To listen to the report vist: #{self.article.url}"
+      puts "This is a link to an ESPN Radio report. To listen to the report vist: #{self.article.url}".colorize(:red)
     end
   end
 
   def exit_menu
-    puts "Finished reading? Enter one of the following options..."
+    puts "Finished reading? Enter one of the following options...".colorize(:yellow)
     puts "1 - Go back to article list for your team."
     puts "2 - Select a new team."
     puts "3 - Exit the program."
@@ -84,7 +84,7 @@ class ESPNScraper::CLI
     elsif input == "2"
       Article.destroy_all
       run
-    elsif input == "3"
+    elsif input == "3" || input.downcase == "exit"
       exit
     else
       invalid_entry

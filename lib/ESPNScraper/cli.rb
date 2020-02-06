@@ -58,7 +58,7 @@ class ESPNScraper::CLI
 
   def show_article_content
     Scraper.get_content(self.article)
-    # puts "#{self.article.content}"
+    puts "#{self.article.title} \n \n"
     self.article.content.each {|p| puts "#{p.text} \n \n"}
   end
 

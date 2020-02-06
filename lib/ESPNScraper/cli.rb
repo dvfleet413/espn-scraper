@@ -20,10 +20,13 @@ class ESPNScraper::CLI
   end
 
   def menu
-    puts "Type the abbreviated name of the team you'd like to read about..."
-    @team = gets.chomp.downcase
-    if Teams.team_abbreviations.include?(@team)
+    puts "Type the abbreviated name of the team you'd like to read about, or type exit to leave the program."
+    input = gets.chomp.downcase
+    if Teams.team_abbreviations.include?(input)
+      @team = input
       build_url
+    elsif input == "exit"
+      exit 
     else
       invalid_entry
       menu
@@ -43,13 +46,15 @@ class ESPNScraper::CLI
   end
 
   def article_menu
-    puts "Enter the number of the article you would like to read..."
+    puts "Enter the number of the article you would like to read, or type exit to leave the program."
     input = gets.chomp
     if input.to_i.between?(1, 5)
       article_index = input.to_i - 1
       @article = Article.all[article_index]
       show_article_content
       exit_menu
+    elsif input.downcase == "exit"
+      exit
     else
       invalid_entry
       article_menu
@@ -59,12 +64,16 @@ class ESPNScraper::CLI
   def show_article_content
     Scraper.get_content(self.article)
     puts "#{self.article.title} \n \n"
-    self.article.content.each {|p| puts "#{p.text} \n \n"}
+    if self.article.content.size > 0
+      self.article.content.each {|p| puts "#{p.text} \n \n"}
+    else
+      puts "This is a link to an ESPN Radio report. To listen to the report vist: #{self.article.url}"
+    end
   end
 
   def exit_menu
     puts "Finished reading? Enter one of the following options..."
-    puts "1 - Go back to article list for your #{team}."
+    puts "1 - Go back to article list for your team."
     puts "2 - Select a new team."
     puts "3 - Exit the program."
 

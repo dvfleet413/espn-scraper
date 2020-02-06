@@ -4,15 +4,14 @@ class Scraper
     html = open(url)
     doc = Nokogiri::HTML(html)
     stories = doc.css("div.item-info-wrap")
-    # title stories.css("h1").text
-    # description stories.css("p").text
     stories.each do |story|
       title = story.css("h1").text
       description = story.css("p").text
-#   some links have href of absolute url instead of relative
-#   check if story.css("a").attribute("href").value starts with 'http'
-#   before assigning url variable    
-      url = "https://www.espn.com#{story.css("a").attribute("href").value}"
+      if story.css("a").attribute("href").value.start_with?("http")
+        url = story.css("a").attribute("href").value
+      else
+        url = "https://www.espn.com#{story.css("a").attribute("href").value}"
+      end
       Article.new(title, description, url)
     end
   end
@@ -20,6 +19,7 @@ class Scraper
   def self.get_content(article)
     html = open(article.url)
     doc = Nokogiri::HTML(html)
+    #for ESPN Radio links, this will return an empty array
     article.content = doc.css("div.article-body p")
   end
 

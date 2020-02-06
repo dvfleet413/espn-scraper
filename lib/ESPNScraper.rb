@@ -1,2 +1,6 @@
 require_relative "./ESPNScraper/version"
 require_relative "./ESPNScraper/cli"
+require_relative "./ESPNScraper/article"
+require "open-uri"
+require "nokogiri"
+require "pry"

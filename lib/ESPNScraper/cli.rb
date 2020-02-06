@@ -1,7 +1,6 @@
 # CLI Controller
-require 'pry'
 class ESPNScraper::CLI
-  attr_accessor :team
+  attr_accessor :team, :url
 
   def teams
     {al_east: [{bal: "Baltimore Orioles"},
@@ -46,10 +45,10 @@ class ESPNScraper::CLI
 
 
   def call
-    puts "Here's the Latest MLB News:"
     list_teams
     menu
     scrape
+    display_articles
   end
 
   def list_teams
@@ -74,12 +73,27 @@ class ESPNScraper::CLI
   end
 
   def scrape
-    build_url
-    binding.pry
+    html = open(@url)
+    doc = Nokogiri::HTML(html)
+    stories = doc.css("div.item-info-wrap")
+    # title stories.css("h1").text
+    # description stories.css("p").text
+    stories.each do |story|
+      title = story.css("h1").text
+      description = story.css("p").text
+      Article.new(title, description)
+    end
+  end
+
+  def display_articles
+    Article.all.each do |article|
+      puts "#{article.title} \n \n"
+      puts "  #{article.description} \n \n \n"
+    end
   end
 
   private
     def build_url
-      url = "https://www.espn.com/mlb/team/_/name/" + "#{@team}"
+      @url = "https://www.espn.com/mlb/team/_/name/" + "#{@team}"
     end
 end

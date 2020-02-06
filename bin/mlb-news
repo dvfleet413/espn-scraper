@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require '../lib/ESPNScraper'
+require './lib/ESPNScraper'
 
 ESPNScraper::CLI.new.call

@@ -8,15 +8,17 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Dave Van Fleet"]
   spec.email         = ["dvfleet413@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{ESPN Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
+                        for your favorite MLB team.}
+  spec.description   = %q{ESPN Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
+                        for your favorite MLB team}
   spec.homepage      = "https://github.com/dvfleet413/espn-scraper"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/dvfleet413/espn-scraper"
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
+  spec.metadata["changelog_uri"] = "https://github.com/dvfleet413/espn-scraper/blob/master/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

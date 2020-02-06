@@ -49,7 +49,7 @@ class ESPNScraper::CLI
     menu
     Scraper.scrape_new_articles(@url)
     display_articles
-    binding.pry 
+    binding.pry
   end
 
   def list_teams
@@ -87,7 +87,7 @@ class ESPNScraper::CLI
 #  end
 
   def display_articles
-    Article.all.each do |article|
+    Article.all.slice(0,5).each do |article|
       puts "#{article.title} \n \n"
       puts "  #{article.description} \n \n \n"
     end

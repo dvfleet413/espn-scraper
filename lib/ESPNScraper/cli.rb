@@ -47,8 +47,9 @@ class ESPNScraper::CLI
   def call
     list_teams
     menu
-    scrape
+    Scraper.scrape_new_articles(@url)
     display_articles
+    binding.pry 
   end
 
   def list_teams
@@ -72,18 +73,18 @@ class ESPNScraper::CLI
     menu
   end
 
-  def scrape
-    html = open(@url)
-    doc = Nokogiri::HTML(html)
-    stories = doc.css("div.item-info-wrap")
-    # title stories.css("h1").text
-    # description stories.css("p").text
-    stories.each do |story|
-      title = story.css("h1").text
-      description = story.css("p").text
-      Article.new(title, description)
-    end
-  end
+#  def scrape
+#    html = open(@url)
+#    doc = Nokogiri::HTML(html)
+#    stories = doc.css("div.item-info-wrap")
+#    # title stories.css("h1").text
+#    # description stories.css("p").text
+#    stories.each do |story|
+#      title = story.css("h1").text
+#      description = story.css("p").text
+#      Article.new(title, description)
+#    end
+#  end
 
   def display_articles
     Article.all.each do |article|

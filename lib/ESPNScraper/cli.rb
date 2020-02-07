@@ -1,6 +1,10 @@
 # CLI Controller
 class ESPNScraper::CLI
-  attr_accessor :team, :url, :article
+  attr_accessor :sport, :team, :url, :article
+
+  def initialize(sport)
+    @sport = sport
+  end
 
   def run
     list_teams
@@ -11,7 +15,7 @@ class ESPNScraper::CLI
   end
 
   def list_teams
-    Teams.teams.each do |division, teams|
+    Teams.mlb_teams.each do |division, teams|
       puts division.to_s.sub(/_/, ' ').upcase.colorize(:magenta).bold
       teams.each do |team|
         team.each{|key,value| puts "  #{key.to_s.upcase} - #{value}"}
@@ -22,7 +26,7 @@ class ESPNScraper::CLI
   def menu
     puts "Type the abbreviated name of the team you'd like to read about, or type exit to leave the program.".colorize(:yellow)
     input = gets.chomp.downcase
-    if Teams.team_abbreviations.include?(input)
+    if Teams.team_abbreviations(self.sport).include?(input)
       @team = input
       build_url
     elsif input == "exit"
@@ -97,6 +101,6 @@ class ESPNScraper::CLI
 
   private
     def build_url
-      @url = "https://www.espn.com/mlb/team/_/name/" + "#{@team}"
+      @url = "https://www.espn.com/" + "#{@sport}" + "/team/_/name/" + "#{@team}"
     end
 end

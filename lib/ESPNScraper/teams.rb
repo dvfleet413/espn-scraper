@@ -1,6 +1,6 @@
 class Teams
 
-  def self.teams
+  def self.mlb_teams
     {al_east: [{bal: "Baltimore Orioles"},
                {bos: "Boston Red Sox"},
                {nyy: "New York Yankees"},
@@ -33,8 +33,49 @@ class Teams
                 {sf: "San Fransisco Giants"}]}
   end
 
-  def self.team_abbreviations
+  def self.nba_teams
+    {atlantic: [{bos: "Boston Celtics"},
+               {bkn: "Brooklyn Nets"},
+               {nyk: "New York Knicks"},
+               {phi: "Philadelphia 76ers"},
+               {tor: "Toronto Raptors"}],
+     central: [{chi: "Chicago Bulls"},
+                  {cle: "Cleveland Cavaliers"},
+                  {det: "Detroit Pistons"},
+                  {ind: "Indiana Pacers"},
+                  {mil: "Milwaukee Bucks"}],
+     southeast: [{atl: "Atlanta Hawks"},
+              {cha: "Charlotte Hornets"},
+              {mia: "Miami Heat"},
+              {orl: "Orlando Magic"},
+              {wsh: "Washington Wizards"}],
+     northwest: [{den: "Denver Nuggets"},
+               {min: "Minnesota Timberwolves"},
+               {okc: "Oklahoma City Thunder"},
+               {por: "Portland Trail Blazers"},
+               {utah: "Utah Jazz"}],
+     pacific: [{gsw: "Golden State Warriors"},
+                   {lac: "LA Clippers"},
+                   {lal: "LA Lakers"},
+                   {phx: "Phoenix Suns"},
+                    {sac: "Sacramento Kings"}],
+      Southwest: [{dal: "Dallas Mavericks"},
+                {hou: "Houston Rockets"},
+                {mem: "Memphis Grizzlies"},
+                {nop: "New Orleans Pelicans"},
+                {sas: "San Antonio Spurs"}]}
+  end
+
+  def self.team_abbreviations(sport)
     abbr_teams = []
+
+    case sport
+    when "mlb"
+      teams = mlb_teams
+    when "nba"
+      teams = nba_teams
+    end
+
     teams.each do |division, teams|
       teams.each {|team| team.each {|abbr, full| abbr_teams << abbr.to_s}}
     end

@@ -26,6 +26,7 @@ class ESPNScraper::CLI
       @team = input
       build_url
     elsif input == "exit"
+      puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
     else
       invalid_entry
@@ -54,6 +55,7 @@ class ESPNScraper::CLI
       show_article_content
       exit_menu
     elsif input.downcase == "exit"
+      puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
     else
       invalid_entry
@@ -85,6 +87,7 @@ class ESPNScraper::CLI
       Article.destroy_all
       run
     elsif input == "3" || input.downcase == "exit"
+      puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
     else
       invalid_entry

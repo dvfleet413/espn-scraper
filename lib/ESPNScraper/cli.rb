@@ -2,11 +2,8 @@
 class ESPNScraper::CLI
   attr_accessor :sport, :team, :url, :article
 
-  def initialize(sport)
-    @sport = sport
-  end
-
   def run
+    welcome
     list_teams
     menu
     Scraper.scrape_new_articles(@url)
@@ -14,8 +11,40 @@ class ESPNScraper::CLI
     article_menu
   end
 
+  def welcome
+    puts "Welcome to the ESPN Scraper, your source for all the latest news for the MLB, NFL, NHL, and NBA!".colorize(:blue)
+    puts "1. MLB"
+    puts "2. NBA"
+    puts "3. NFL"
+    puts "4. NHL"
+    puts "Type the number of the sport you'd like to read about...".colorize(:yellow)
+
+    input = gets.chomp.downcase
+
+    case input
+    when "1"
+      @sport = "mlb"
+    when "2"
+      @sport = "nba"
+    when "3"
+      @sport = "nfl"
+    when "4"
+      @sport = "nhl"
+    else
+      puts "Sorry, we didn't understand your entry...".colorize(:red)
+      puts "Please try again...".colorize(:red)
+      welcome
+    end
+  end
+
   def list_teams
-    Teams.mlb_teams.each do |division, teams|
+    case self.sport
+    when "mlb"
+      all_teams = Teams.mlb_teams
+    when "nba"
+      all_teams = Teams.nba_teams
+    end
+    all_teams.each do |division, teams|
       puts division.to_s.sub(/_/, ' ').upcase.colorize(:magenta).bold
       teams.each do |team|
         team.each{|key,value| puts "  #{key.to_s.upcase} - #{value}"}

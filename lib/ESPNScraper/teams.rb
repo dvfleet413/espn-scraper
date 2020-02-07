@@ -1,5 +1,7 @@
 class Teams
 
+
+
   def self.mlb_teams
     {al_east: [{bal: "Baltimore Orioles"},
                {bos: "Boston Red Sox"},
@@ -64,6 +66,14 @@ class Teams
                 {mem: "Memphis Grizzlies"},
                 {nop: "New Orleans Pelicans"},
                 {sas: "San Antonio Spurs"}]}
+  end
+
+  def self.nhl_teams
+# todo - add hash of teams
+  end
+
+  def self.nfl_teams
+# todo - add hash of teams
   end
 
   def self.team_abbreviations(sport)

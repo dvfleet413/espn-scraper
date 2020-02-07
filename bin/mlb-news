@@ -2,4 +2,7 @@
 
 require './lib/ESPNScraper'
 
-ESPNScraper::CLI.new("mlb").run
+
+
+
+ESPNScraper::CLI.new.run

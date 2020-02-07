@@ -21,7 +21,7 @@ class Scraper
     doc = Nokogiri::HTML(html)
     stories = doc.css("article").select{|story| story.css('a.contentItem__content').attribute('href')}
     stories.each do |story|
-      title = story.css("h2").text
+      title = story.css("h2.contentItem__title").text
       description = nil
       if story.css('a.contentItem__content').attribute('href').value.start_with?("http")
         url = story.css('a.contentItem__content').attribute('href').value

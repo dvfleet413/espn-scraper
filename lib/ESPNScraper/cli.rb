@@ -6,7 +6,7 @@ class ESPNScraper::CLI
     welcome
     list_teams
     menu
-    Scraper.scrape_new_articles(@url)
+    self.sport == "nhl" ? Scraper.scrape_new_nhl_articles(self.url) : Scraper.scrape_new_articles(self.url)
     display_articles
     article_menu
   end
@@ -43,6 +43,8 @@ class ESPNScraper::CLI
       all_teams = Teams.mlb_teams
     when "nba"
       all_teams = Teams.nba_teams
+    when "nhl"
+      all_teams = Teams.nhl_teams
     end
     all_teams.each do |division, teams|
       puts division.to_s.sub(/_/, ' ').upcase.colorize(:magenta).bold

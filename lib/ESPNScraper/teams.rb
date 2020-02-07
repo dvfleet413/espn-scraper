@@ -69,7 +69,37 @@ class Teams
   end
 
   def self.nhl_teams
-# todo - add hash of teams
+    {atlantic: [{bos: "Boston Bruins"},
+                {buf: "Buffalo Sabres"},
+                {det: "Detroit Redwings"},
+                {fla: "Florida Panthers"},
+                {mtl: "Montreal Canadiens"},
+                {ott: "Ottowa Senators"},
+                {tb: "Tampa Bay Lightning"},
+                {tor: "Toronto Maple Leafs"}],
+     central: [{chi: "Chicago Blackhawks"},
+               {col: "Colorado Avalanche"},
+               {dal: "Dallas Stars"},
+               {min: "Minnesota Wild"},
+               {nsh: "Nashville Predators"},
+               {stl: "St. Louis Blues"},
+               {wpg: "Winnipeg Jets"}],
+     metropolitan: [{car: "Carolina Hurricanes"},
+                    {cbj: "Columbus Blue Jackets"},
+                    {nj: "New Jersey Devils"},
+                    {nyi: "New York Islanders"},
+                    {nyr: "New York Rangers"},
+                    {phi: "Philadelphi Flyers"},
+                    {pit: "Pittsburgh Penguins"},
+                    {wsh: "Washington Capitals"}],
+     pacific: [{ana: "Anaheim Ducks"},
+               {ari: "Arizona Coyotes"},
+               {cgy: "Calgary Flames"},
+               {edm: "Edmonton Oilers"},
+               {la: "Los Angeles Kings"},
+               {sj: "San Jose Sharks"},
+               {van: "Vancouver Canucks"},
+               {vgs: "Vegas Golden Knights"}]}
   end
 
   def self.nfl_teams
@@ -84,6 +114,8 @@ class Teams
       teams = mlb_teams
     when "nba"
       teams = nba_teams
+    when "nhl"
+      teams = nhl_teams
     end
 
     teams.each do |division, teams|

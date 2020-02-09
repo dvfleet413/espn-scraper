@@ -1,7 +1,5 @@
 class Teams
 
-
-
   def self.mlb_teams
     {al_east: [{bal: "Baltimore Orioles"},
                {bos: "Boston Red Sox"},
@@ -103,7 +101,38 @@ class Teams
   end
 
   def self.nfl_teams
-# todo - add hash of teams
+    {afc_east: [{buf: "Buffalo Bills"},
+                {mia: "Miami Dolfins"},
+                {ne: "New England Patriots"},
+                {nyj: "New York Jets"}],
+     afc_north: [{bal: "Baltimore Ravens"},
+                 {cin: "Cincinnati Bengals"},
+                 {cle: "Cleveland Browns"},
+                 {pit: "Pitsburgh Steelers"}],
+     afc_south: [{hou: "Houston Texans"},
+                 {ind: "Indianapolis Colts"},
+                 {jax: "Jacksonville Jaguars"},
+                 {ten: "Tennessee Titans"}],
+     afc_west: [{den: "Denver Broncos"},
+                {kc: "Kansas City Chiefs"},
+                {lac: "Los Angeles Chargers"},
+                {oak: "Oakland Raiders"}],
+      nfc_east: [{dal: "Dallas Cowboys"},
+                 {nyg: "New York Giants"},
+                 {phi: "Philadelphia Eagles"},
+                 {wsh: "Washington Redskins"}],
+      nfc_north: [{chi: "Chicago Bears"},
+                  {det: "Detroit Lions"},
+                  {gb: "Green Bay Packers"},
+                  {min: "Minnesota Vikings"}],
+      nfc_south: [{atl: "Atlanta Falcons"},
+                  {car: "Carolina Panthers"},
+                  {no: "New Orleans Saints"},
+                  {tb: "Tampa Bay Buccaneers"}],
+      nfc_west: [{ari: "Arizona Cardinals"},
+                 {lar: "Los Angeles Rams"},
+                 {sf: "San Fransisco 49ers"},
+                 {sea: "Seattle Seahawks"}]}
   end
 
   def self.team_abbreviations(sport)
@@ -114,6 +143,8 @@ class Teams
       teams = mlb_teams
     when "nba"
       teams = nba_teams
+    when "nfl"
+      teams = nfl_teams
     when "nhl"
       teams = nhl_teams
     end

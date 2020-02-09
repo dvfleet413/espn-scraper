@@ -31,8 +31,7 @@ class ESPNScraper::CLI
     when "4"
       @sport = "nhl"
     else
-      puts "Sorry, we didn't understand your entry...".colorize(:red)
-      puts "Please try again...".colorize(:red)
+      invalid_entry
       welcome
     end
   end
@@ -43,6 +42,8 @@ class ESPNScraper::CLI
       all_teams = Teams.mlb_teams
     when "nba"
       all_teams = Teams.nba_teams
+    when "nfl"
+      all_teams = Teams.nfl_teams
     when "nhl"
       all_teams = Teams.nhl_teams
     end
@@ -55,12 +56,17 @@ class ESPNScraper::CLI
   end
 
   def menu
-    puts "Type the abbreviated name of the team you'd like to read about, or type exit to leave the program.".colorize(:yellow)
+    puts "Type the abbreviated name of the team you'd like to read about.".colorize(:yellow)
+    puts "  Other Options...".colorize(:yellow)
+    puts "    1. Select New Sport".colorize(:yellow)
+    puts "    2. Exit".colorize(:yellow)
     input = gets.chomp.downcase
     if Teams.team_abbreviations(self.sport).include?(input)
       @team = input
       build_url
-    elsif input == "exit"
+    elsif input == "1"
+      run
+    elsif input == "2" || input == "exit"
       puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
     else

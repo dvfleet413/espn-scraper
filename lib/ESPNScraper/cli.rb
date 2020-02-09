@@ -132,10 +132,10 @@ class ESPNScraper::CLI
 
   def exit_menu
     puts "Finished reading? Enter one of the following options...".colorize(:yellow)
-    puts "1 - Go back to article list for your team"
-    puts "2 - Select a new sport"
-    puts "3 - Select a new team in this league"
-    puts "4 - Exit the program"
+    puts "1 - Go back to article list for your team".colorize(:yellow)
+    puts "2 - Select a new sport".colorize(:yellow)
+    puts "3 - Select a new team in this league".colorize(:yellow)
+    puts "4 - Exit the program".colorize(:yellow)
 
     input = gets.chomp
     if input == "1"

@@ -6,3 +6,4 @@ gemspec
 
 gem 'nokogiri'
 gem 'colorize'
+gem 'tty-prompt'

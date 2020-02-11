@@ -3,40 +3,26 @@ class ESPNScraper::CLI
   attr_accessor :sport, :team, :url, :article
 
   def run
+    @prompt = TTY::Prompt.new
     welcome
   end
 
   def welcome
+    system "clear"
     puts "Welcome to the ESPN Scraper, your source for all the latest news for the MLB, NFL, NHL, and NBA!".colorize(:blue)
-    puts "1. MLB"
-    puts "2. NBA"
-    puts "3. NFL"
-    puts "4. NHL"
-    puts "Type the number of the sport you'd like to read about...".colorize(:yellow)
-    input = gets.chomp.downcase
-    case input
-    when "1"
-      @sport = "mlb"
-      list_teams
-    when "2"
-      @sport = "nba"
-      list_teams
-    when "3"
-      @sport = "nfl"
-      list_teams
-    when "4"
-      @sport = "nhl"
-      list_teams
-    when "exit"
+    options = ["MLB", "NBA", "NFL", "NHL", "Exit"]
+    input = @prompt.select("Select the sport you'd like to read about...", options).downcase
+    if input == "exit"
       puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
     else
-      invalid_entry
-      welcome
+      @sport = input
+      list_teams
     end
   end
 
   def list_teams
+    system "clear"
     case self.sport
     when "mlb"
       all_teams = Teams.mlb_teams
@@ -57,34 +43,24 @@ class ESPNScraper::CLI
   end
 
   def menu
-    puts "Type the abbreviated name of the team you'd like to read about.".colorize(:yellow)
-    puts "  Other Options...".colorize(:yellow)
-    puts "    1. Select New Sport".colorize(:yellow)
-    puts "    2. Exit".colorize(:yellow)
-    input = gets.chomp.downcase
+    options = Teams.team_abbreviations(self.sport).collect{|team| team.upcase} + ["Select New Sport", "Exit"]
+    input = @prompt.select("Select the team you'd like to read about.", options, filter: true).downcase
     if Teams.team_abbreviations(self.sport).include?(input)
       @team = input
       build_url
       self.sport == "nhl" ? Scraper.scrape_new_nhl_articles(self.url) : Scraper.scrape_new_articles(self.url)
       display_articles
-    elsif input == "1"
+    elsif input == "select new sport"
       Article.destroy_all
       run
-    elsif input == "2" || input.downcase == "exit"
+    elsif input ==  "exit"
       puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
-    else
-      invalid_entry
-      menu
     end
   end
 
-  def invalid_entry
-    puts "Sorry, we didn't understand your entry...".colorize(:red)
-    puts "Please try again...".colorize(:red)
-  end
-
   def display_articles
+    system "clear"
     Article.all.slice(0,5).each_with_index do |article, index|
       puts "#{index + 1}. #{article.title}".colorize(:light_blue).bold
       puts "  #{article.description} \n \n"
@@ -93,34 +69,29 @@ class ESPNScraper::CLI
   end
 
   def article_menu
-    puts "Enter the number of the article you would like to read.".colorize(:yellow)
-    puts "  Other Options...".colorize(:yellow)
-    puts "    6. Select New Sport".colorize(:yellow)
-    puts "    7. Select New Team".colorize(:yellow)
-    puts "    8. Exit".colorize(:yellow)
-    input = gets.chomp
+    options = ["1", "2", "3", "4", "5",
+    "Select New Sport", "Select New Team", "Exit"]
+    input = @prompt.select("Which article would you like to read?", options)
     if input.to_i.between?(1, 5)
       article_index = input.to_i - 1
       @article = Article.all[article_index]
       show_article_content
       exit_menu
-    elsif input == "6"
+    elsif input == "Select New Sport"
       Article.destroy_all
       run
-    elsif input == "7"
+    elsif input == "Select New Team"
       Article.destroy_all
       list_teams
       menu
-    elsif input == "8" || input.downcase == "exit"
+    elsif input == "Exit"
       puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
-    else
-      invalid_entry
-      article_menu
     end
   end
 
   def show_article_content
+    system "clear"
     Scraper.get_content(self.article)
     puts "#{self.article.title} \n \n".colorize(:light_blue).bold
     if self.article.content.size > 0
@@ -131,27 +102,19 @@ class ESPNScraper::CLI
   end
 
   def exit_menu
-    puts "Finished reading? Enter one of the following options...".colorize(:yellow)
-    puts "1 - Go back to article list for your team".colorize(:yellow)
-    puts "2 - Select a new sport".colorize(:yellow)
-    puts "3 - Select a new team in this league".colorize(:yellow)
-    puts "4 - Exit the program".colorize(:yellow)
-
-    input = gets.chomp
-    if input == "1"
+    options = ["Return to articles", "Select a new sport", "Select a new team in this league", "Exit"]
+    input = @prompt.select("What would you like to do now?", options)
+    if input == "Return to articles"
       display_articles
       article_menu
-    elsif input == "2"
+    elsif input == "Select a new sport"
       Article.destroy_all
       run
-    elsif input == "3"
+    elsif input == "Select a new team in this league"
       list_teams
-    elsif input == "4" || input.downcase == "exit"
+    elsif input == "Exit"
       puts "Ending the program. See you again soon!".colorize(:yellow)
       exit
-    else
-      invalid_entry
-      exit_menu
     end
   end
 

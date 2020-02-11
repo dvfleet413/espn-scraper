@@ -7,3 +7,4 @@ require "open-uri"
 require "nokogiri"
 require "colorize"
 require "pry"
+require 'tty-prompt'

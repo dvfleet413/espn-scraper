@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "ESPNScraper/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "espn_scraper"
+  spec.name          = "sports_news_scraper"
   spec.version       = ESPNScraper::VERSION
   spec.authors       = ["Dave Van Fleet"]
   spec.email         = ["dvfleet413@gmail.com"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
                         for your favorite MLB team}
   spec.homepage      = "https://github.com/dvfleet413/espn-scraper"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+#  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/dvfleet413/espn-scraper"
@@ -27,7 +27,8 @@ Gem::Specification.new do |spec|
   end
 
   spec.bindir        = "bin"
-  spec.executables   << "espn_scraper"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables   << "sports_news_scraper"
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 2.0"

@@ -34,4 +34,13 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+
+  spec.add_runtime_dependency "nokogiri", "~> 0.8"
+  spec.add_runtime_dependency "colorize", "~> 1.10"
+  spec.add_runtime_dependency "tty-prompt", "~> 0.20"
+
+
+  gem 'nokogiri'
+  gem 'colorize'
+  gem 'tty-prompt'
 end

@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/ESPNScraper'
-
-
-
+require_relative '../config/environment.rb'
 
 ESPNScraper::CLI.new.run

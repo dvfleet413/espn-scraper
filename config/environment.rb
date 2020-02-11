@@ -1,0 +1,10 @@
+require_relative "../lib/ESPNScraper/version.rb"
+require_relative "../lib/ESPNScraper/cli.rb"
+require_relative "../lib/ESPNScraper/article.rb"
+require_relative "../lib/ESPNScraper/scraper.rb"
+require_relative "../lib/ESPNScraper/teams.rb"
+require "open-uri"
+require "nokogiri"
+require "colorize"
+require "pry"
+require 'tty-prompt'

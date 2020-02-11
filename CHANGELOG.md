@@ -12,4 +12,9 @@ Modified runtime dependencies for easier installation.
 
 ## 0.1.2
 
-Fixed errors in runtime dependencies
+Fixed errors in runtime dependencies.
+
+
+## 0.1.3
+
+Fixed configuration errors in order to download on remote machine.

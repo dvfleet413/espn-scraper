@@ -8,3 +8,8 @@ Initial release.
 ## 0.1.1
 
 Modified runtime dependencies for easier installation.
+
+
+## 0.1.2
+
+Fixed errors in runtime dependencies

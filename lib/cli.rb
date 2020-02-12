@@ -1,5 +1,5 @@
 # CLI Controller
-class ESPNScraper::CLI
+class CLI
   attr_accessor :sport, :team, :url, :article
 
   def initialize

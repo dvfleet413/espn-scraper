@@ -1,16 +1,16 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ESPNScraper/version"
+require "lib/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "sports_news_scraper"
-  spec.version       = ESPNScraper::VERSION
+  spec.version       = SportsNewsScraper::VERSION
   spec.authors       = ["Dave Van Fleet"]
   spec.email         = ["dvfleet413@gmail.com"]
 
-  spec.summary       = %q{ESPN Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
+  spec.summary       = %q{Sports News Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
                         for your favorite MLB team.}
-  spec.description   = %q{ESPN Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
+  spec.description   = %q{Sports News Scraper is a CLI gem designed to provide quick access to articles on ESPN.com
                         for your favorite MLB team}
   spec.homepage      = "https://github.com/dvfleet413/espn-scraper"
 

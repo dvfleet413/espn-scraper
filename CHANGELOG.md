@@ -18,3 +18,8 @@ Fixed errors in runtime dependencies.
 ## 0.1.3
 
 Fixed configuration errors in order to download on remote machine.
+
+
+## 0.1.6
+
+Updated metadata, fixed name, and reorganized directories.

@@ -18,7 +18,7 @@ The interface is very user friendly, simply follow the prompts in the CLI to mak
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ESPN_Scraper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dvfleet413/ESPN_Scraper.
 
 ## License
 

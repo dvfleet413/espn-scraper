@@ -1,7 +1,10 @@
 PATH
   remote: .
   specs:
-    ESPNScraper (0.1.0)
+    sports_news_scraper (0.1.5)
+      colorize (~> 0.8)
+      nokogiri (~> 1.10)
+      tty-prompt (~> 0.20)
 
 GEM
   remote: https://rubygems.org/
@@ -47,12 +50,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ESPNScraper!
   bundler (~> 2.0)
   colorize
   nokogiri
   rake (~> 10.0)
   rspec (~> 3.0)
+  sports_news_scraper!
   tty-prompt
 
 BUNDLED WITH

@@ -1,5 +1,9 @@
 require "bundler/setup"
-require "ESPN_Scraper"
+require_relative "../lib/ESPNScraper/version.rb"
+require_relative "../lib/ESPNScraper/cli.rb"
+require_relative "../lib/ESPNScraper/article.rb"
+require_relative "../lib/ESPNScraper/scraper.rb"
+require_relative "../lib/ESPNScraper/teams.rb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

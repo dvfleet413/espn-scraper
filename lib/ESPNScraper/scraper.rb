@@ -14,6 +14,7 @@ class Scraper
       end
       Article.new(title, description, url)
     end
+    Article.all
   end
 
   def self.scrape_new_nhl_articles(url)
@@ -30,6 +31,7 @@ class Scraper
       end
       Article.new(title, description, url)
     end
+    Article.all
   end
 
   def self.get_content(article)

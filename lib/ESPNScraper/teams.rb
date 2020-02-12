@@ -59,7 +59,7 @@ class Teams
                    {lal: "LA Lakers"},
                    {phx: "Phoenix Suns"},
                     {sac: "Sacramento Kings"}],
-      Southwest: [{dal: "Dallas Mavericks"},
+      southwest: [{dal: "Dallas Mavericks"},
                 {hou: "Houston Rockets"},
                 {mem: "Memphis Grizzlies"},
                 {nop: "New Orleans Pelicans"},

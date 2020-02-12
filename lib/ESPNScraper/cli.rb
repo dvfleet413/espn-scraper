@@ -2,8 +2,11 @@
 class ESPNScraper::CLI
   attr_accessor :sport, :team, :url, :article
 
-  def run
+  def initialize
     @prompt = TTY::Prompt.new
+  end
+
+  def run
     welcome
   end
 

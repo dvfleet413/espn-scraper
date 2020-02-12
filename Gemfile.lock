@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sports_news_scraper (0.1.5)
+    sports_news_scraper (0.1.6)
       colorize (~> 0.8)
       nokogiri (~> 1.10)
       tty-prompt (~> 0.20)
